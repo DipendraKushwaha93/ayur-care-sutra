@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Link, useLocation } from "react-router-dom";
 import { 
   Home,
   Users,
@@ -29,6 +30,8 @@ const managementItems = [
 ];
 
 export function Sidebar() {
+  const location = useLocation();
+  
   return (
     <div className="fixed left-0 top-0 h-screen w-64 bg-card border-r border-border shadow-card">
       <div className="p-6">
@@ -51,14 +54,17 @@ export function Sidebar() {
             Patient Care
           </p>
           {navigationItems.map((item) => (
-            <Button
-              key={item.label}
-              variant="ghost"
-              className="w-full justify-start text-left hover:bg-primary/10 hover:text-primary transition-smooth"
-            >
-              <item.icon className="mr-3 h-4 w-4" />
-              {item.label}
-            </Button>
+            <Link key={item.label} to={item.href}>
+              <Button
+                variant="ghost"
+                className={`w-full justify-start text-left hover:bg-primary/10 hover:text-primary transition-smooth ${
+                  location.pathname === item.href ? 'bg-primary/10 text-primary' : ''
+                }`}
+              >
+                <item.icon className="mr-3 h-4 w-4" />
+                {item.label}
+              </Button>
+            </Link>
           ))}
         </div>
         
@@ -69,14 +75,17 @@ export function Sidebar() {
             Management
           </p>
           {managementItems.map((item) => (
-            <Button
-              key={item.label}
-              variant="ghost"
-              className="w-full justify-start text-left hover:bg-primary/10 hover:text-primary transition-smooth"
-            >
-              <item.icon className="mr-3 h-4 w-4" />
-              {item.label}
-            </Button>
+            <Link key={item.label} to={item.href}>
+              <Button
+                variant="ghost"
+                className={`w-full justify-start text-left hover:bg-primary/10 hover:text-primary transition-smooth ${
+                  location.pathname === item.href ? 'bg-primary/10 text-primary' : ''
+                }`}
+              >
+                <item.icon className="mr-3 h-4 w-4" />
+                {item.label}
+              </Button>
+            </Link>
           ))}
         </div>
       </div>
