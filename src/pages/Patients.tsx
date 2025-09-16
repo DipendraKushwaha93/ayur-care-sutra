@@ -1,5 +1,4 @@
 import { useState } from "react";
-<<<<<<< HEAD
 import {
   Dialog,
   DialogContent,
