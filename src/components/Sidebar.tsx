@@ -11,7 +11,8 @@ import {
   Settings,
   Leaf,
   Stethoscope,
-  ClipboardList
+  ClipboardList,
+  X
 } from "lucide-react";
 
 const navigationItems = [
@@ -29,20 +30,39 @@ const managementItems = [
   { icon: Settings, label: "Settings", href: "/settings" },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const location = useLocation();
   
   return (
-    <div className="fixed left-0 top-0 h-screen w-64 bg-card border-r border-border shadow-card">
+    <div className={`fixed left-0 top-0 h-screen w-64 bg-card border-r border-border shadow-card z-40 transition-transform duration-300 lg:translate-x-0 ${
+      isOpen ? 'translate-x-0' : '-translate-x-full'
+    }`}>
       <div className="p-6">
-        <div className="flex items-center space-x-3">
-          <div className="p-2 bg-gradient-primary rounded-lg">
-            <Leaf className="h-6 w-6 text-primary-foreground" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="p-2 bg-gradient-primary rounded-lg">
+              <Leaf className="h-6 w-6 text-primary-foreground" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-primary">AyurSutra</h1>
+              <p className="text-sm text-muted-foreground">Clinic Management</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-primary">AyurSutra</h1>
-            <p className="text-sm text-muted-foreground">Clinic Management</p>
-          </div>
+          {onClose && (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={onClose}
+              className="lg:hidden"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          )}
         </div>
       </div>
       

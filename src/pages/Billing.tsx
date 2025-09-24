@@ -132,17 +132,17 @@ const Billing = () => {
     <DashboardLayout>
       <div className="space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Billing & Payments</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Billing & Payments</h1>
             <p className="text-muted-foreground mt-1">Manage invoices, payments, and treatment packages</p>
           </div>
-          <div className="flex space-x-2">
-            <Button variant="outline">
+          <div className="flex flex-col sm:flex-row gap-2">
+            <Button variant="outline" className="w-full sm:w-auto">
               <Download className="w-4 h-4 mr-2" />
               Export
             </Button>
-            <Button className="bg-gradient-primary hover:bg-primary-light">
+            <Button className="bg-gradient-primary hover:bg-primary-light w-full sm:w-auto">
               <Plus className="w-4 h-4 mr-2" />
               New Invoice
             </Button>
@@ -150,55 +150,55 @@ const Billing = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           <Card className="shadow-card">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Total Revenue</p>
-                  <p className="text-2xl font-bold text-primary">₹{(stats.totalRevenue / 1000).toFixed(0)}K</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Total Revenue</p>
+                  <p className="text-lg sm:text-2xl font-bold text-primary">₹{(stats.totalRevenue / 1000).toFixed(0)}K</p>
                   <p className="text-xs text-secondary mt-1">This month</p>
                 </div>
-                <DollarSign className="h-8 w-8 text-primary" />
+                <DollarSign className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
           
           <Card className="shadow-card">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Paid Invoices</p>
-                  <p className="text-2xl font-bold text-secondary">{stats.paidInvoices}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Paid Invoices</p>
+                  <p className="text-lg sm:text-2xl font-bold text-secondary">{stats.paidInvoices}</p>
                   <p className="text-xs text-secondary mt-1">Completed</p>
                 </div>
-                <CheckCircle className="h-8 w-8 text-secondary" />
+                <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-secondary" />
               </div>
             </CardContent>
           </Card>
           
           <Card className="shadow-card">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Pending Amount</p>
-                  <p className="text-2xl font-bold text-accent">₹{(stats.pendingAmount / 1000).toFixed(0)}K</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Pending Amount</p>
+                  <p className="text-lg sm:text-2xl font-bold text-accent">₹{(stats.pendingAmount / 1000).toFixed(0)}K</p>
                   <p className="text-xs text-accent mt-1">Awaiting payment</p>
                 </div>
-                <Clock className="h-8 w-8 text-accent" />
+                <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-accent" />
               </div>
             </CardContent>
           </Card>
           
           <Card className="shadow-card">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Overdue</p>
-                  <p className="text-2xl font-bold text-destructive">{stats.overdueCount}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Overdue</p>
+                  <p className="text-lg sm:text-2xl font-bold text-destructive">{stats.overdueCount}</p>
                   <p className="text-xs text-destructive mt-1">Need attention</p>
                 </div>
-                <AlertCircle className="h-8 w-8 text-destructive" />
+                <AlertCircle className="h-6 w-6 sm:h-8 sm:w-8 text-destructive" />
               </div>
             </CardContent>
           </Card>
@@ -221,7 +221,7 @@ const Billing = () => {
                 <CardTitle>Search & Filter Invoices</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
@@ -245,12 +245,12 @@ const Billing = () => {
                     </SelectContent>
                   </Select>
                   
-                  <Button variant="outline">
+                  <Button variant="outline" className="w-full sm:w-auto">
                     <Filter className="w-4 h-4 mr-2" />
                     Date Range
                   </Button>
                   
-                  <Button variant="outline">
+                  <Button variant="outline" className="w-full sm:w-auto">
                     <Receipt className="w-4 h-4 mr-2" />
                     Generate Report
                   </Button>
@@ -262,20 +262,22 @@ const Billing = () => {
             <div className="space-y-4">
               {filteredInvoices.map((invoice) => (
                 <Card key={invoice.id} className="shadow-card hover:shadow-elegant transition-smooth">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-4">
                       <div className="flex-1">
-                        <div className="flex items-center space-x-3 mb-2">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
                           <h3 className="text-lg font-semibold text-foreground">{invoice.patientName}</h3>
-                          <Badge className="text-xs">{invoice.id}</Badge>
-                          <Badge className={statusColors[invoice.status as keyof typeof statusColors]} variant="secondary">
-                            {invoice.status}
-                          </Badge>
+                          <div className="flex items-center gap-2">
+                            <Badge className="text-xs">{invoice.id}</Badge>
+                            <Badge className={statusColors[invoice.status as keyof typeof statusColors]} variant="secondary">
+                              {invoice.status}
+                            </Badge>
+                          </div>
                         </div>
                         <p className="text-sm text-primary font-medium">{invoice.therapist}</p>
                       </div>
-                      <div className="text-right">
-                        <p className="text-2xl font-bold text-primary">₹{invoice.amount.toLocaleString()}</p>
+                      <div className="text-left sm:text-right">
+                        <p className="text-xl sm:text-2xl font-bold text-primary">₹{invoice.amount.toLocaleString()}</p>
                         <p className="text-xs text-muted-foreground">Due: {invoice.dueDate}</p>
                       </div>
                     </div>
@@ -291,23 +293,23 @@ const Billing = () => {
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between text-sm text-muted-foreground mb-4 gap-2">
                       <span>Invoice Date: {invoice.date}</span>
                       {invoice.paymentMethod && (
                         <span>Payment: {invoice.paymentMethod}</span>
                       )}
                     </div>
                     
-                    <div className="flex space-x-2">
-                      <Button variant="outline" size="sm">
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <Button variant="outline" size="sm" className="w-full sm:w-auto">
                         View Details
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className="w-full sm:w-auto">
                         <Download className="w-3 h-3 mr-1" />
                         Download PDF
                       </Button>
                       {invoice.status !== 'Paid' && (
-                        <Button size="sm" className="bg-gradient-primary">
+                        <Button size="sm" className="bg-gradient-primary w-full sm:w-auto">
                           <CreditCard className="w-3 h-3 mr-1" />
                           Collect Payment
                         </Button>
